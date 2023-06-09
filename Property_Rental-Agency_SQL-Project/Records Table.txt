@@ -1,0 +1,12 @@
+create table records(
+ prop_id int,
+ adhar_id int,
+ start_date date,
+ end_date date,
+ rent int,
+ hike int,
+ comm int,
+ primary key(prop_id,start_date),
+ foreign key(prop_id) references property(prop_id),
+ foreign key (adhar_id) references users(adhar_id)
+);

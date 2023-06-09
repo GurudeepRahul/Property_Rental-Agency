@@ -1,0 +1,6 @@
+ create table phone
+    (
+    adhar_id int,
+    phno int,
+    foreign key(adhar_id) references users(adhar_id)
+    );

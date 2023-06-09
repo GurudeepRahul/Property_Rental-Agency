@@ -1,0 +1,5 @@
+create or replace procedure InsertPropertyRecord(a in number,b in number,c in number,d in date,e in date,f in int,g in varchar,h in number,i in number,k in number,l in number,m in number,n in varchar)is
+begin
+insert into property values(a,b,c,d,e,f,g,h,i,k,l,m,n);
+end;
+/

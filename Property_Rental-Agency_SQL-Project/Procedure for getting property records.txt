@@ -1,0 +1,14 @@
+CREATE OR REPLACE PROCEDURE GetPropertyRecords(
+    p_adhar_id IN users.adhar_id%TYPE
+)
+AS
+BEGIN
+  FOR r IN (
+    SELECT prop_id
+    FROM property
+    WHERE adhar_id = p_adhar_id
+  ) LOOP
+    DBMS_OUTPUT.PUT_LINE('Property ID: ' || r.prop_id);
+  END LOOP;
+END;
+/

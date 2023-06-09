@@ -1,0 +1,34 @@
+CREATE OR REPLACE PROCEDURE add_rental_record(
+    p_prop_id IN property.prop_id%TYPE,
+    p_adhar_id IN users.adhar_id%TYPE,
+    p_start_date IN records.start_date%TYPE,
+    p_end_date IN records.end_date%TYPE,
+    p_comm IN records.comm%TYPE
+    p_hike IN records.hike%TYPE;
+)
+AS
+  v_rent property.rent%TYPE;
+BEGIN
+  -- Check if property is available
+  SELECT avilability, rent
+  INTO v_avilability, v_rent
+  FROM property
+  WHERE prop_id = p_prop_id;
+  
+  IF v_availability = 1 THEN
+    -- Insert into records table
+    INSERT INTO records VALUES(p_prop_id, p_adhar_id, p_start_date, p_end_date, v_rent,p_hike, p_comm);
+    
+    -- Update property table to mark property as unavailable
+    UPDATE property
+    SET avilability = 0
+    WHERE prop_id = p_prop_id;
+    
+    -- Commit the transaction
+    COMMIT;
+  ELSE
+    -- Raise an exception if property is not available
+    RAISE_APPLICATION_ERROR(-20001, 'Property is not available');
+  END IF;
+END;
+/

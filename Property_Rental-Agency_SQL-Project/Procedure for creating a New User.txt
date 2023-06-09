@@ -1,0 +1,6 @@
+
+create or replace procedure CreateNewUser(a in number,b in varchar,c in number,d in varchar,e in number,f in varchar,g in varchar,h in number,i in varchar)is
+begin
+insert into users values(a,b,c,d,e,f,g,h,i);
+end;
+/

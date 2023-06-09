@@ -1,0 +1,18 @@
+create table property(
+ adhar_id int,
+ prop_id int,
+ floors int,
+ start_date date,
+ end_date date,
+ area int,
+ address varchar(30),
+ rent int,
+ hike int,
+ plinth_area int,
+ yoc int,
+ bedno int,
+ avilability int,
+ locality varchar(10),
+ primary key(prop_id),
+ foreign key(adhar_id) references users(adhar_id)
+);

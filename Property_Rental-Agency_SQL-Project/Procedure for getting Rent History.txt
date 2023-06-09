@@ -1,0 +1,26 @@
+CREATE OR REPLACE PROCEDURE GetRentHistory(p_prop_id IN NUMBER)
+IS
+  v_prop_id records.prop_id%TYPE;
+  v_adhar_id records.adhar_id%TYPE;
+  v_start_date records.start_date%TYPE;
+  v_end_date records.end_date%TYPE;
+  v_rent records.rent%TYPE;
+  v_hike records.hike%TYPE;                 
+  v_comm records.comm%TYPE;
+BEGIN
+  FOR rec IN (
+    SELECT prop_id, adhar_id, start_date, end_date, rent, hike, comm
+    FROM records
+    WHERE prop_id = p_prop_id
+  )
+  LOOP
+    DBMS_OUTPUT.PUT_LINE('prop_id: ' || rec.prop_id);
+    DBMS_OUTPUT.PUT_LINE('adhar_id: ' || rec.adhar_id);
+    DBMS_OUTPUT.PUT_LINE('start_date: ' || rec.start_date);
+    DBMS_OUTPUT.PUT_LINE('end_date: ' || rec.end_date);
+    DBMS_OUTPUT.PUT_LINE('rent: ' || rec.rent);
+    DBMS_OUTPUT.PUT_LINE('hike: ' || rec.hike);
+    DBMS_OUTPUT.PUT_LINE('comm: ' || rec.comm);
+  END LOOP;
+END;
+/

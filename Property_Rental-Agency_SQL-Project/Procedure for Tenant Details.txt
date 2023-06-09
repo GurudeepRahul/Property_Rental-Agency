@@ -1,0 +1,27 @@
+CREATE OR REPLACE PROCEDURE GetTenantDetails(p_prop_id IN NUMBER)
+IS
+  v_prop_id records.prop_id%TYPE;
+  v_adhar_id records.adhar_id%TYPE;
+  v_start_date records.start_date%TYPE;
+  v_end_date records.end_date%TYPE;
+  v_rent records.rent%TYPE;
+  v_hike records.hike%TYPE;
+  v_comm records.comm%TYPE;
+  v_name users.name%TYPE;
+  v_age users.age%TYPE;
+  v_doorno users.doorno%TYPE;
+  v_street users.street%TYPE;
+  v_city users.city%TYPE;
+  v_pin users.pin%TYPE;
+  v_job users.job%TYPE;
+BEGIN
+  -- Get the latest record for the given prop_id
+  SELECT prop_id, adhar_id, start_date, end_date, rent, hike, comm
+  INTO v_prop_id, v_adhar_id, v_start_date, v_end_date, v_rent, v_hike, v_comm
+  FROM (
+    SELECT prop_id, adhar_id, start_date, end_date, rent, hike, comm
+    FROM records
+    WHERE prop_id = p_prop_id
+    ORDER BY start_date DESC
+  )
+  WHERE ROWNUM = 1;
